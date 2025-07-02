@@ -102,6 +102,7 @@ namespace StarterAssets
         private PlayerInput _playerInput;
 #endif
         private Animator _animator;
+        private Animator _animatorChild;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
@@ -109,6 +110,7 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
+        private bool _hasAnimatorChild;
 
         private bool IsCurrentDeviceMouse
         {
@@ -135,7 +137,8 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+            Transform charTransform = transform.Find("Char");
+            _hasAnimatorChild = charTransform.TryGetComponent<Animator>(out _animatorChild);
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -272,6 +275,13 @@ namespace StarterAssets
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             // update animator if using character
+
+            if (_hasAnimatorChild)
+            {
+                _animatorChild.SetFloat(_animIDSpeed, _animationBlend);
+                //_animatorChild.SetFloat(_animIDMotionSpeed, inputMagnitude);
+            }
+
             if (_hasAnimator)
             {
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
