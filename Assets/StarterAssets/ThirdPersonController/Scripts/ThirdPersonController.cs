@@ -101,6 +101,7 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
         private int _animIDCrouch;
+        private int _animIDAttack;
 
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
@@ -166,6 +167,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            Attack();
         }
 
         private void LateUpdate()
@@ -181,6 +183,7 @@ namespace StarterAssets
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
             _animIDCrouch = Animator.StringToHash("Crouch");
+            _animIDAttack = Animator.StringToHash("Attack");
         }
 
         private void GroundedCheck()
@@ -219,11 +222,27 @@ namespace StarterAssets
                 _cinemachineTargetYaw, 0.0f);
         }
 
+        private void Attack()
+        {
+            if (_input.attack)
+            {
+                if (_input.crouch)
+                {
+                    _animatorChild.SetBool(_animIDAttack, _input.attack);
+                    _input.attack = false; // reset attack input after processing
+                }
+                else
+                {
+                    _input.attack = false; // reset attack input after processing
+                }
+            }
+        }
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
             targetSpeed = _input.crouch ? CrouchSpeed : targetSpeed; // allow crouch to override sprint speed
+            targetSpeed = _input.attack ? 0f : targetSpeed; // allow attack to override all movement speeds
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
