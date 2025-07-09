@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerVision : MonoBehaviour
 {
     [SerializeField] float visionRange = 5f; // Range of the player's vision
     [SerializeField] LayerMask interactableLayer; // Layer mask to filter interactable objects
+    public UnityEvent onInteractRange; // Event to trigger when an interaction is possible
+    public UnityEvent onInteractNotRange; // Event to trigger when no interactable objects are in range
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,10 +21,11 @@ public class PlayerVision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        Ray vision = new Ray(transform.position, transform.forward);
+        if (Physics.Raycast(vision, out RaycastHit hitInfo, visionRange, interactableLayer))
         {
-            Ray vision = new Ray(transform.position, transform.forward);
-            if (Physics.Raycast(vision, out RaycastHit hitInfo, visionRange, interactableLayer))
+            onInteractRange.Invoke(); // Trigger the interaction event if an interactable object is in range
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
@@ -28,6 +35,10 @@ public class PlayerVision : MonoBehaviour
                     interactable.Interact(); // Call the Interact method on the interactable object
                 }
             }
+        }
+        else
+        {
+            onInteractNotRange.Invoke(); // Trigger the no interaction event if no interactable objects are in range
         }
     }
 
