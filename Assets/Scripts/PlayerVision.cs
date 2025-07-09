@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerVision : MonoBehaviour
 {
     [SerializeField] float visionRange = 5f; // Range of the player's vision
+    [SerializeField] LayerMask interactableLayer; // Layer mask to filter interactable objects
     // Start is called before the first frame update
     void Start()
     {
@@ -17,13 +18,15 @@ public class PlayerVision : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Ray vision = new Ray(transform.position, transform.forward);
-            if (Physics.Raycast(vision, out RaycastHit hitInfo, visionRange))
+            if (Physics.Raycast(vision, out RaycastHit hitInfo, visionRange, interactableLayer))
             {
-                Debug.Log("Hit: " + LayerMask.LayerToName(hitInfo.collider.gameObject.layer));
-            }
-            else
-            {
-                Debug.Log("No hit detected.");
+                
+                Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
+                if (interactable != null)
+                {
+                    Debug.Log("Hit");
+                    interactable.Interact(); // Call the Interact method on the interactable object
+                }
             }
         }
     }
