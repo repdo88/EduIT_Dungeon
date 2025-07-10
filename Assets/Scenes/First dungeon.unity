@@ -2032,6 +2032,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b31c62c35ced11c4383176ecffe930c9, type: 3}
+--- !u!1 &166350654 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+  m_PrefabInstance: {fileID: 481268588}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &167666014 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5059969035713293582, guid: edd823a24a8b3e545b7f38240de1e369, type: 3}
@@ -5105,7 +5110,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       insertIndex: 0
       addedObject: {fileID: 222793224}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 2047120105}
   m_SourcePrefab: {fileID: 100100000, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
 --- !u!1 &482645322 stripped
 GameObject:
@@ -12344,7 +12352,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1142360584}
-  - component: {fileID: 1142360585}
   m_Layer: 0
   m_Name: Vision
   m_TagString: Untagged
@@ -12367,52 +12374,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 222793224}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1142360585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1142360583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02a7fd8d6f794b14ba9aca9ffcabc35a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visionRange: 1
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  onInteractRange:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 557043044}
-        m_TargetAssemblyTypeName: ManagerScene, Assembly-CSharp
-        m_MethodName: ShowPressText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onInteractNotRange:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 557043044}
-        m_TargetAssemblyTypeName: ManagerScene, Assembly-CSharp
-        m_MethodName: HidePressText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1143173487 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6135064160481251829, guid: edd823a24a8b3e545b7f38240de1e369, type: 3}
@@ -23573,6 +23534,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
   m_PrefabInstance: {fileID: 481268588}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2047120105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166350654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02a7fd8d6f794b14ba9aca9ffcabc35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eyes: {fileID: 1142360583}
+  visionRange: 1
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  onInteractRange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 557043044}
+        m_TargetAssemblyTypeName: ManagerScene, Assembly-CSharp
+        m_MethodName: ShowPressText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onInteractNotRange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 557043044}
+        m_TargetAssemblyTypeName: ManagerScene, Assembly-CSharp
+        m_MethodName: HidePressText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2053002320 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4463566038210007903, guid: 49a5f24a081cbbc44bd23d76c2869723, type: 3}

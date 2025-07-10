@@ -14,8 +14,9 @@ namespace StarterAssets
 		public bool sprint;
 		public bool crouch;
 		public bool attack;
+		public bool interact;
 
-		[Header("Movement Settings")]
+        [Header("Movement Settings")]
 		public bool analogMovement;
 
 		[Header("Mouse Cursor Settings")]
@@ -53,6 +54,10 @@ namespace StarterAssets
         public void OnAttack(InputValue value)
         {
             AttackInput(value.isPressed);
+        }
+        public void OnInteract(InputValue value)
+        {
+            InteractInput(value.isPressed);
         }
 #endif
 
@@ -92,7 +97,11 @@ namespace StarterAssets
         {
             attack = newAttackState;
         }
-				
+
+        public void InteractInput(bool newInteractState)
+        {
+            interact = newInteractState;
+        }
 
 
         private void OnApplicationFocus(bool hasFocus)
