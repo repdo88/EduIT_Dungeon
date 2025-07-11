@@ -1,3 +1,4 @@
+using StarterAssets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +21,10 @@ public class EnemyBrain : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private NavMeshAgent agent;
 
+    private ThirdPersonController playerController;
+    [SerializeField] private bool playerIsCrouch;
+    [SerializeField] private float playerSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +32,7 @@ public class EnemyBrain : MonoBehaviour
         {
             agent = GetComponent<NavMeshAgent>();
         }
+        playerController = ThirdPersonController.Instance;
     }
 
     // Update is called once per frame
@@ -47,6 +53,8 @@ public class EnemyBrain : MonoBehaviour
         inAngleVision = angleToPlayer > (1 - visionAngleThreshold);
         inRangeVision = distanceToPlayer < visionMaxDistance;
         inMinRadius = distanceToPlayer < minRadius;
+        playerIsCrouch = playerController.playerIsCrouch;
+        playerSpeed = playerController.playerSpeed;
 
         if ((inAngleVision && inRangeVision) || inMinRadius)
         {
@@ -74,4 +82,5 @@ public class EnemyBrain : MonoBehaviour
         }
         Gizmos.DrawRay(transform.position, directionToPlayer.normalized * visionMaxDistance);
     }
+
 }

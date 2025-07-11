@@ -78,6 +78,11 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+        //Singleton instance
+        public static ThirdPersonController Instance { get; private set; }
+        public bool playerIsCrouch;
+        public float playerSpeed;
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -132,6 +137,15 @@ namespace StarterAssets
 
         private void Awake()
         {
+            // Singleton pattern to ensure only one instance exists
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
             // get a reference to our main camera
             if (_mainCamera == null)
             {
@@ -312,6 +326,10 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
+
+            // update singleton instance variables
+            playerIsCrouch = _input.crouch;
+            playerSpeed = _speed;
         }
 
         private void JumpAndGravity()
