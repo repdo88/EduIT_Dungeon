@@ -9,6 +9,7 @@ public class EnemyBrain : MonoBehaviour
 {
     [Header("Sensors")]
     [SerializeField] private float visionAngleThreshold = 0.3f;
+    private float tempVisionAngleTheshold;
     [SerializeField] private float visionMaxDistance = 3f;
     [SerializeField] private float minRadius = 3f;
     [SerializeField] private bool seePlayer;
@@ -43,18 +44,27 @@ public class EnemyBrain : MonoBehaviour
 
     private void UpdateSensors()
     {
-        //calculate distance to player
-        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        playerIsCrouch = playerController.playerIsCrouch;
+        playerSpeed = playerController.playerSpeed;
+        if (!playerIsCrouch && playerSpeed > 0f)
+        {
+            tempVisionAngleTheshold = 2f;
+        }
+        else
+        {
+            tempVisionAngleTheshold = visionAngleThreshold;
+        }
+            //calculate distance to player
+            distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         //calculate direction to player
         directionToPlayer = (player.transform.position - transform.position).normalized;
         //calculate angle to player
         float angleToPlayer = Vector3.Dot(transform.forward, directionToPlayer);
         //bools to see the state of the sensors
-        inAngleVision = angleToPlayer > (1 - visionAngleThreshold);
+        inAngleVision = angleToPlayer > (1 - tempVisionAngleTheshold);
         inRangeVision = distanceToPlayer < visionMaxDistance;
         inMinRadius = distanceToPlayer < minRadius;
-        playerIsCrouch = playerController.playerIsCrouch;
-        playerSpeed = playerController.playerSpeed;
+        
 
         if ((inAngleVision && inRangeVision) || inMinRadius)
         {
