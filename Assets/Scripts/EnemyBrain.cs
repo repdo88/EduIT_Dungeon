@@ -17,14 +17,17 @@ public class EnemyBrain : MonoBehaviour
     [SerializeField] private bool inRangeVision;
     [SerializeField] private bool inMinRadius;
     private Vector3 directionToPlayer;
+    private Vector3 directionToChest;
     [SerializeField] private float distanceToPlayer;
 
     [SerializeField] private Transform player;
+    [SerializeField] private Transform playerChest;
     [SerializeField] private NavMeshAgent agent;
 
     private ThirdPersonController playerController;
     [SerializeField] private bool playerIsCrouch;
     [SerializeField] private float playerSpeed;
+    [SerializeField] private string playerLayer = "Player";
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +47,7 @@ public class EnemyBrain : MonoBehaviour
 
     private void UpdateSensors()
     {
+        //logic to simulate that the enemy can hear the player when is moving and is not crouch
         playerIsCrouch = playerController.playerIsCrouch;
         playerSpeed = playerController.playerSpeed;
         if (!playerIsCrouch && playerSpeed > 0f)
@@ -54,10 +58,11 @@ public class EnemyBrain : MonoBehaviour
         {
             tempVisionAngleTheshold = visionAngleThreshold;
         }
-            //calculate distance to player
-            distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        //calculate distance to player
+        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         //calculate direction to player
         directionToPlayer = (player.transform.position - transform.position).normalized;
+        directionToChest = (playerChest.transform.position - transform.position).normalized;
         //calculate angle to player
         float angleToPlayer = Vector3.Dot(transform.forward, directionToPlayer);
         //bools to see the state of the sensors
@@ -68,13 +73,20 @@ public class EnemyBrain : MonoBehaviour
 
         if ((inAngleVision && inRangeVision) || inMinRadius)
         {
-            seePlayer = true;
-            //Debug.Log("Player is in vision cone and range");
+            Ray vision = new Ray(transform.position, directionToChest);
+            if (Physics.Raycast(vision, out RaycastHit hitInfo, visionMaxDistance))
+            {
+                int targetLayer = LayerMask.NameToLayer(playerLayer);
+                seePlayer = (hitInfo.collider.gameObject.layer == targetLayer);
+            }
+            else
+            {
+                seePlayer = false;
+            }
         }
         else
         {
             seePlayer = false;
-            //Debug.Log("Player is not in vision cone or range");
         }
 
 
@@ -90,7 +102,7 @@ public class EnemyBrain : MonoBehaviour
         {
             Gizmos.color = Color.red;
         }
-        Gizmos.DrawRay(transform.position, directionToPlayer.normalized * visionMaxDistance);
+        Gizmos.DrawRay(transform.position, directionToChest.normalized * visionMaxDistance);
     }
 
 }
