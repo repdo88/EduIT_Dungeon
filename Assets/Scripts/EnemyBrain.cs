@@ -28,9 +28,12 @@ public class EnemyBrain : MonoBehaviour
     [SerializeField] private EnemyBaseState patrolState; // Patrol state of the enemy
     [SerializeField] private float patrolTime = 5f; // Time to wait before patrolling again
     [SerializeField] private EnemyBaseState chaseState; // Chase state of the enemy
-
+    [SerializeField] private EnemyBaseState checkSoundState; // Chase state of the enemy
+    [SerializeField] private bool doorTrigger = false; // Flag to check if the door is triggered
+    [SerializeField] private float distanceToDoor; // Distance to the door when triggered
     private EnemyBaseState currentState; // Current state of the enemy
     private float lostPlayerTimer = 0f; // Timer to track how long the player has been lost
+    private Vector3 doorPosition; // Position of the door when triggered
 
     [Header("Player")]
     [SerializeField] private Transform player;
@@ -42,6 +45,16 @@ public class EnemyBrain : MonoBehaviour
     [SerializeField] private float playerSpeed;
     [SerializeField] private string playerLayer = "Player";
 
+
+    private void OnEnable()
+    {
+        OpenCloseDoor.OnDoorInteract += OnDoorEvent; // Subscribe to the door interaction event
+    }
+
+    private void OnDisable()
+    {
+        OpenCloseDoor.OnDoorInteract -= OnDoorEvent; // Unsubscribe from the door interaction event
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -110,11 +123,22 @@ public class EnemyBrain : MonoBehaviour
         }
 
         // State transitions based on sensors
-        if (seePlayer)
+        if (!seePlayer && doorTrigger)
+        {
+            TransitionToState(checkSoundState); // Transition to check sound state if the door is triggered
+            distanceToDoor = Vector3.Distance(transform.position, doorPosition);
+            if (distanceToDoor < 3f)
+            {
+                doorTrigger = false; // Reset the door trigger flag if close to the door
+                TransitionToState(patrolState); // Transition to patrol state after a certain time
+            }
+            //doorTrigger = false; // Reset the door trigger flag
+        }
+        else if (seePlayer)
         {
             lostPlayerTimer = 0f; // Reset the timer if the player is seen
             TransitionToState(chaseState);
-            
+            doorTrigger = false; // Reset the door trigger flag
         }
         else
         {
@@ -125,7 +149,7 @@ public class EnemyBrain : MonoBehaviour
                 lostPlayerTimer = 0f; // Reset the timer
                 TransitionToState(patrolState); // Transition to patrol state after a certain time
             }
-            
+
         }
 
     }
@@ -137,6 +161,12 @@ public class EnemyBrain : MonoBehaviour
         currentState.OnExitState(); // Exit the current state
         currentState = newState; // Set the new state
         currentState.OnEnterState(); // Enter the new state
+    }
+
+    private void OnDoorEvent(OpenCloseDoor door)
+    {
+        doorTrigger = true; // Set the door trigger flag to true
+        doorPosition = door.transform.position; // Store the position of the door when triggered
     }
 
     private void OnDrawGizmosSelected()
