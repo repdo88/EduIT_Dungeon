@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class OpenCloseDoor : MonoBehaviour, Interactable
 {
@@ -9,6 +10,7 @@ public class OpenCloseDoor : MonoBehaviour, Interactable
     private int animIDInteract = Animator.StringToHash("Interact");
     private bool hasAnimator;
     private bool isOpen = false;
+    public UnityEvent onDoorMoves; // Unity event to trigger when the door moves
 
     // Start is called before the first frame update
     void Start()
@@ -29,10 +31,12 @@ public class OpenCloseDoor : MonoBehaviour, Interactable
             doorAnimator.SetTrigger(animIDInteract);
             if (!isOpen)
             {
+                onDoorMoves?.Invoke(); // Trigger the Unity event when the door opens
                 doorAnimator.SetBool(animIDOpen, true);
             }
             else
             {
+                onDoorMoves?.Invoke(); // Trigger the Unity event when the door opens
                 doorAnimator.SetBool(animIDOpen, false);
             }
             isOpen = !isOpen; // Toggle the open state

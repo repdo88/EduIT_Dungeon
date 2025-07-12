@@ -15924,7 +15924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da7062a6f1be86468bfab9d020086e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionAngleThreshold: 0.3
+  visionAngleThreshold: 0.5
   visionMaxDistance: 7
   minRadius: 2
   seePlayer: 0
@@ -15935,6 +15935,7 @@ MonoBehaviour:
   isActive: 1
   defaultState: {fileID: 1403286362}
   patrolState: {fileID: 1403286362}
+  patrolTime: 5
   chaseState: {fileID: 1403286361}
   player: {fileID: 2047120099}
   playerChest: {fileID: 1327984131}
