@@ -2,6 +2,7 @@ using StarterAssets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,7 +20,17 @@ public class EnemyBrain : MonoBehaviour
     private Vector3 directionToPlayer;
     private Vector3 directionToChest;
     [SerializeField] private float distanceToPlayer;
+    [SerializeField] private bool isActive = true; // Flag to enable or disable the enemy sensors
 
+    [Header("State")]
+    [SerializeField] private EnemyBaseState defaultState; // Default state of the enemy
+
+    [SerializeField] private EnemyBaseState patrolState; // Patrol state of the enemy
+    [SerializeField] private EnemyBaseState chaseState; // Chase state of the enemy
+
+    private EnemyBaseState currentState; // Current state of the enemy
+
+    [Header("Player")]
     [SerializeField] private Transform player;
     [SerializeField] private Transform playerChest;
     [SerializeField] private NavMeshAgent agent;
@@ -37,11 +48,18 @@ public class EnemyBrain : MonoBehaviour
             agent = GetComponent<NavMeshAgent>();
         }
         playerController = ThirdPersonController.Instance;
+
+        currentState = defaultState;
+        currentState.OnEnterState(); // Initialize the current state
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isActive)
+        {
+            currentState.UpdateState(); // Update the current state of the enemy
+        }
         UpdateSensors();
     }
 

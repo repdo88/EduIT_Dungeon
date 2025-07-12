@@ -15903,6 +15903,8 @@ GameObject:
   - component: {fileID: 1403286357}
   - component: {fileID: 1403286356}
   - component: {fileID: 1403286355}
+  - component: {fileID: 1403286362}
+  - component: {fileID: 1403286361}
   m_Layer: 0
   m_Name: Capsule (2)
   m_TagString: Untagged
@@ -15930,6 +15932,10 @@ MonoBehaviour:
   inRangeVision: 0
   inMinRadius: 0
   distanceToPlayer: 0
+  isActive: 1
+  defaultState: {fileID: 1403286362}
+  patrolState: {fileID: 1403286362}
+  chaseState: {fileID: 1403286361}
   player: {fileID: 2047120099}
   playerChest: {fileID: 1327984131}
   agent: {fileID: 1403286356}
@@ -15950,7 +15956,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -16047,6 +16053,35 @@ Transform:
   - {fileID: 1618190711}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1403286361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403286354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709d0b39c7aa06445b085e0ac3cfc9f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1403286362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403286354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46519fa254e8bb840b5a765982035146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 1223124110}
+  - {fileID: 949895812}
+  - {fileID: 923272383}
+  - {fileID: 601884980}
 --- !u!1001 &1407065784
 PrefabInstance:
   m_ObjectHideFlags: 0
