@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class EnemyBrain : MonoBehaviour
 {
     [Header("Sensors")]
-    [SerializeField] private float visionAngleThreshold = 0.3f;
+    [SerializeField] private float visionAngleThreshold = 0.5f;
     private float tempVisionAngleTheshold;
     [SerializeField] private float visionMaxDistance = 3f;
     [SerializeField] private float minRadius = 3f;
@@ -26,9 +26,11 @@ public class EnemyBrain : MonoBehaviour
     [SerializeField] private EnemyBaseState defaultState; // Default state of the enemy
 
     [SerializeField] private EnemyBaseState patrolState; // Patrol state of the enemy
+    [SerializeField] private float patrolTime = 5f; // Time to wait before patrolling again
     [SerializeField] private EnemyBaseState chaseState; // Chase state of the enemy
 
     private EnemyBaseState currentState; // Current state of the enemy
+    private float lostPlayerTimer = 0f; // Timer to track how long the player has been lost
 
     [Header("Player")]
     [SerializeField] private Transform player;
@@ -110,11 +112,20 @@ public class EnemyBrain : MonoBehaviour
         // State transitions based on sensors
         if (seePlayer)
         {
+            lostPlayerTimer = 0f; // Reset the timer if the player is seen
             TransitionToState(chaseState);
+            
         }
         else
         {
-            TransitionToState(patrolState);
+            lostPlayerTimer += Time.deltaTime; // Increment the timer if the player is not seen
+
+            if (lostPlayerTimer >= patrolTime)
+            {
+                lostPlayerTimer = 0f; // Reset the timer
+                TransitionToState(patrolState); // Transition to patrol state after a certain time
+            }
+            
         }
 
     }
