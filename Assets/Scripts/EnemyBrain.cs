@@ -130,7 +130,7 @@ public class EnemyBrain : MonoBehaviour
             if (distanceToDoor < 3f)
             {
                 doorTrigger = false; // Reset the door trigger flag if close to the door
-                TransitionToState(patrolState); // Transition to patrol state after a certain time
+                //TransitionToState(patrolState); // Transition to patrol state after a certain time
             }
             //doorTrigger = false; // Reset the door trigger flag
         }
@@ -160,7 +160,7 @@ public class EnemyBrain : MonoBehaviour
 
         currentState.OnExitState(); // Exit the current state
         currentState = newState; // Set the new state
-        currentState.OnEnterState(); // Enter the new state
+        currentState.OnEnterState(doorPosition); // Enter the new state
     }
 
     private void OnDoorEvent(OpenCloseDoor door)

@@ -13,6 +13,7 @@ public class OpenCloseDoor : MonoBehaviour, Interactable
     private bool isOpen = false;
     public static event Action<OpenCloseDoor> OnDoorInteract; // Event to notify when the door is interacted with
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,19 +28,22 @@ public class OpenCloseDoor : MonoBehaviour, Interactable
 
     public void Interact()
     {
+        OnDoorInteract.Invoke(this); // Notify subscribers that the door is being interacted with
+        
         if (hasAnimator)
         {
             doorAnimator.SetTrigger(animIDInteract);
             
             if (!isOpen)
             {
-                OnDoorInteract?.Invoke(this); // Notify subscribers that the door is being interacted with
+                
+                //OnDoorInteract?.Invoke(this); // Notify subscribers that the door is being interacted with
                 doorAnimator.SetBool(animIDOpen, true);
                 isOpen = !isOpen; // Toggle the open state
             }
             else
             {
-                OnDoorInteract?.Invoke(this); // Notify subscribers that the door is being interacted with
+                //OnDoorInteract?.Invoke(this); // Notify subscribers that the door is being interacted with
                 doorAnimator.SetBool(animIDOpen, false);
                 isOpen = !isOpen; // Toggle the open state
             }

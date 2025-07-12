@@ -8,6 +8,7 @@ using UnityEngine.AI;
 public class StatePatrol : EnemyBaseState
 {
     [SerializeField] private float patrolSpeed = 1.0f; // Speed of the patrol
+    [SerializeField] private float stoppingDistance = 0.1f; // Distance at which the agent stops
     [SerializeField] private Transform[] waypoints; // Array of waypoints for the enemy to patrol
     private int currentWaypointIndex = 0; // Index of the current waypoint
     private Transform currentWaypoint; // Current waypoint transform
@@ -19,6 +20,7 @@ public class StatePatrol : EnemyBaseState
         base.OnEnterState();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = patrolSpeed; // Set the speed of the agent
+        agent.stoppingDistance = stoppingDistance; // Set the stopping distance for the agent
         currentWaypoint = waypoints[(int)currentWaypointIndex]; // Get the next waypoint
     }
 

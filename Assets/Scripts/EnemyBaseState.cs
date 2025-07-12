@@ -7,6 +7,10 @@ public abstract class EnemyBaseState : MonoBehaviour
     {
     }
 
+    public virtual void OnEnterState(Vector3 pos)
+    {
+    }
+
     public virtual void UpdateState() // this could be the Update Method from Unity too
     {
     }
