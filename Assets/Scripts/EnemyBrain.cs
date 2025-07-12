@@ -107,7 +107,25 @@ public class EnemyBrain : MonoBehaviour
             seePlayer = false;
         }
 
+        // State transitions based on sensors
+        if (seePlayer)
+        {
+            TransitionToState(chaseState);
+        }
+        else
+        {
+            TransitionToState(patrolState);
+        }
 
+    }
+
+    private void TransitionToState(EnemyBaseState newState)
+    {
+        if (newState == currentState) return; // No transition if the state is the same
+
+        currentState.OnExitState(); // Exit the current state
+        currentState = newState; // Set the new state
+        currentState.OnEnterState(); // Enter the new state
     }
 
     private void OnDrawGizmosSelected()
