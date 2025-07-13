@@ -6,7 +6,7 @@ public class ManagerScene : MonoBehaviour
 {
     public static ManagerScene Instance; // Singleton instance of the ManagerScene class
     [SerializeField] GameObject pressEText; // Reference to the UI text object that prompts the player to press 'E'
-    
+    [SerializeField] GameObject gameOverBackground; // Reference to the player GameObject
 
 
     public void Awake()
@@ -38,5 +38,11 @@ public class ManagerScene : MonoBehaviour
         }
     }
 
-
+    public void ShowGameOverBackground()
+    {
+        if (gameOverBackground != null)
+        {
+            gameOverBackground.SetActive(true); // Show the game over background
+        }
+    }
 }
