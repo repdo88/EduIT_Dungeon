@@ -10,9 +10,9 @@ public class StateCheckSound : EnemyBaseState
     private NavMeshAgent agent; // Reference to the NavMeshAgent component
     
 
-    public override void OnEnterState(Vector3 doorPos)
+    public override void OnEnterState2(Vector3 doorPos)
     {
-        base.OnEnterState();
+        base.OnEnterState2(doorPos);
         agent = GetComponent<NavMeshAgent>();
         agent.speed = chaseSpeed; // Set the speed of the agent
         agent.stoppingDistance = stoppingDistance; // Set the stopping distance for the agent

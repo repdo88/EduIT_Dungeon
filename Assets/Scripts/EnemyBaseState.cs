@@ -7,7 +7,7 @@ public abstract class EnemyBaseState : MonoBehaviour
     {
     }
 
-    public virtual void OnEnterState(Vector3 pos)
+    public virtual void OnEnterState2(Vector3 pos)
     {
     }
 

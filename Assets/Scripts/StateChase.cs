@@ -7,7 +7,7 @@ public class StateChase : EnemyBaseState
 {
     [SerializeField] private float chaseSpeed = 3.0f; // Speed of the chase
     [SerializeField] private float stoppingDistance = 0.1f; // Distance at which the agent stops
-    [SerializeField] GameObject Player; // Reference to the player GameObject
+    [SerializeField] private Transform Player; // Reference to the player GameObject
     private NavMeshAgent agent; // Reference to the NavMeshAgent component
 
 
@@ -21,6 +21,6 @@ public class StateChase : EnemyBaseState
 
     public override void UpdateState()
     {
-        agent.SetDestination(Player.transform.position);
+        agent.SetDestination(Player.position);
     }
 }

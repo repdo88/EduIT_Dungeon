@@ -45,6 +45,9 @@ public class EnemyBrain : MonoBehaviour
     [SerializeField] private float playerSpeed;
     [SerializeField] private string playerLayer = "Player";
 
+    private int animIDSpeed; // Animator ID for speed parameter
+    private Animator animator; // Animator component for the enemy
+    private bool hasAnimator; // Flag to check if the enemy has an animator component
 
     private void OnEnable()
     {
@@ -55,6 +58,13 @@ public class EnemyBrain : MonoBehaviour
     {
         OpenCloseDoor.OnDoorInteract -= OnDoorEvent; // Unsubscribe from the door interaction event
     }
+
+    private void Awake()
+    {
+        hasAnimator = TryGetComponent<Animator>(out animator); // Check if the enemy has an animator component
+        animIDSpeed = Animator.StringToHash("Speed"); // Initialize the animator ID for speed parameter
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +84,11 @@ public class EnemyBrain : MonoBehaviour
         if (isActive)
         {
             currentState.UpdateState(); // Update the current state of the enemy
+
+        }
+        if (hasAnimator)
+        {
+            animator.SetFloat(animIDSpeed, agent.velocity.magnitude); // Update the animator speed parameter
         }
         UpdateSensors();
     }
@@ -160,7 +175,8 @@ public class EnemyBrain : MonoBehaviour
 
         currentState.OnExitState(); // Exit the current state
         currentState = newState; // Set the new state
-        currentState.OnEnterState(doorPosition); // Enter the new state
+        currentState.OnEnterState2(doorPosition); // Enter the new state
+        currentState.OnEnterState(); // Enter the new state
     }
 
     private void OnDoorEvent(OpenCloseDoor door)
