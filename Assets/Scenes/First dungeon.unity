@@ -15496,6 +15496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolSpeed: 1
   stoppingDistance: 0.1
+  pauseTime: 1
   waypoints:
   - {fileID: 1223124110}
   - {fileID: 949895812}
@@ -16606,6 +16607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolSpeed: 1
   stoppingDistance: 0.1
+  pauseTime: 1
   waypoints:
   - {fileID: 1223124110}
   - {fileID: 949895812}

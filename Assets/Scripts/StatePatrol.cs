@@ -9,11 +9,12 @@ public class StatePatrol : EnemyBaseState
 {
     [SerializeField] private float patrolSpeed = 1.0f; // Speed of the patrol
     [SerializeField] private float stoppingDistance = 0.1f; // Distance at which the agent stops
+    [SerializeField] private float pauseTime = 1f; // Time to pause at each waypoint
     [SerializeField] private Transform[] waypoints; // Array of waypoints for the enemy to patrol
     private int currentWaypointIndex = 0; // Index of the current waypoint
     private Transform currentWaypoint; // Current waypoint transform
     private NavMeshAgent agent; // Reference to the NavMeshAgent component
-    private float pauseTime = 1f; // Time to pause at each waypoint
+    
     private float pauseTimer = 0f; // Timer to track pause duration
     public override void OnEnterState()
     {
