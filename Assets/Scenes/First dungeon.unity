@@ -15272,7 +15272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5f96b63163e2e6b4e80c8c055f70aa50, type: 3}
       propertyPath: m_Name
-      value: Zombie Running
+      value: Zombie
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5f96b63163e2e6b4e80c8c055f70aa50, type: 3}
       propertyPath: m_Layer
@@ -27352,5 +27352,5 @@ SceneRoots:
   - {fileID: 987897018}
   - {fileID: 1403286360}
   - {fileID: 336367782}
-  - {fileID: 1577306131}
   - {fileID: 1337866952}
+  - {fileID: 1577306131}
