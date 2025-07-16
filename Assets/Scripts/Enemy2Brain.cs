@@ -10,15 +10,13 @@ public class Enemy2Brain : MonoBehaviour
     [SerializeField] private float visionAngleThreshold = 0.5f;
     private float tempVisionAngleTheshold;
     [SerializeField] private float visionMaxDistance = 3f;
-    [SerializeField] private float minRadius = 3f;
-    [SerializeField] private bool seePlayer;
-    [SerializeField] private bool inAngleVision;
-    [SerializeField] private bool inRangeVision;
-    [SerializeField] private bool inMinRadius;
+    private bool seePlayer;
+    private bool inAngleVision;
+    private bool inRangeVision;
     private Vector3 directionToPlayer;
     private Vector3 directionToChest;
-    [SerializeField] private float distanceToPlayer;
-    [SerializeField] private bool isActive = true; // Flag to enable or disable the enemy sensors
+     private float distanceToPlayer;
+     private bool isActive = true; // Flag to enable or disable the enemy sensors
 
     [Header("State")]
     [SerializeField] private EnemyBaseState defaultState; // Default state of the enemy
@@ -27,11 +25,12 @@ public class Enemy2Brain : MonoBehaviour
     [SerializeField] private float patrolTime = 5f; // Time to wait before patrolling again
     [SerializeField] private EnemyBaseState chaseState; // Chase state of the enemy
     [SerializeField] private EnemyBaseState checkSoundState; // Chase state of the enemy
-    [SerializeField] private bool doorTrigger = false; // Flag to check if the door is triggered
-    [SerializeField] private float distanceToDoor; // Distance to the door when triggered
+    private bool doorTrigger = false; // Flag to check if the door is triggered
+    private float distanceToDoor; // Distance to the door when triggered
     private EnemyBaseState currentState; // Current state of the enemy
     private float lostPlayerTimer = 0f; // Timer to track how long the player has been lost
     private Vector3 doorPosition; // Position of the door when triggered
+    [SerializeField] private EnemyBaseState attackState; // Attack state of the enemy
 
     [Header("Player")]
     [SerializeField] private Transform player;
@@ -39,8 +38,8 @@ public class Enemy2Brain : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
 
     private ThirdPersonController playerController;
-    [SerializeField] private bool playerIsCrouch;
-    [SerializeField] private float playerSpeed;
+    private bool playerIsCrouch;
+    private float playerSpeed;
     [SerializeField] private string playerLayer = "Player";
 
     private int animIDSpeed; // Animator ID for speed parameter
@@ -114,10 +113,10 @@ public class Enemy2Brain : MonoBehaviour
         //bools to see the state of the sensors
         inAngleVision = angleToPlayer > (1 - tempVisionAngleTheshold);
         inRangeVision = distanceToPlayer < visionMaxDistance;
-        inMinRadius = distanceToPlayer < minRadius;
+        
 
 
-        if ((inAngleVision && inRangeVision) || inMinRadius)
+        if ((inAngleVision && inRangeVision))
         {
             Ray vision = new Ray(transform.position, directionToChest);
             if (Physics.Raycast(vision, out RaycastHit hitInfo, visionMaxDistance))
