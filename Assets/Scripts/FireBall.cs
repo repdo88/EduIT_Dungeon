@@ -22,7 +22,11 @@ public class FireBall : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject); // Destroy the fireball
+        if (other.transform.gameObject.layer != LayerMask.NameToLayer("EnemyNoMortal"))
+        {
+            Destroy(gameObject); // Destroy the fireball
+        }
+        
     }
 
     public void Initialized(Transform playerPos)

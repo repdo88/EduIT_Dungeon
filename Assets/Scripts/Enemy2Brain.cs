@@ -15,8 +15,8 @@ public class Enemy2Brain : MonoBehaviour
     private bool inRangeVision;
     private Vector3 directionToPlayer;
     private Vector3 directionToChest;
-     private float distanceToPlayer;
-     private bool isActive = true; // Flag to enable or disable the enemy sensors
+    private float distanceToPlayer;
+    private bool isActive = true; // Flag to enable or disable the enemy sensors
 
     [Header("State")]
     [SerializeField] private EnemyBaseState defaultState; // Default state of the enemy
@@ -149,7 +149,7 @@ public class Enemy2Brain : MonoBehaviour
         else if (seePlayer)
         {
             lostPlayerTimer = 0f; // Reset the timer if the player is seen
-            TransitionToState(chaseState);
+            TransitionToState(attackState);
             doorTrigger = false; // Reset the door trigger flag
         }
         else

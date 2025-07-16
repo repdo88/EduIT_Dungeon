@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4410241804940320}
   - component: {fileID: 198121823610078880}
   - component: {fileID: 199338329820519516}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4853,7 +4853,7 @@ GameObject:
   - component: {fileID: 4857446216290978}
   - component: {fileID: 198938839109166378}
   - component: {fileID: 199173897474711878}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9695,7 +9695,7 @@ GameObject:
   - component: {fileID: 4404365773844742}
   - component: {fileID: 198449976809265600}
   - component: {fileID: 199218580650235198}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FireDark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14537,7 +14537,7 @@ GameObject:
   - component: {fileID: 4927245751746350}
   - component: {fileID: 198439384557487006}
   - component: {fileID: 199526426274550578}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19379,7 +19379,7 @@ GameObject:
   - component: {fileID: 4274653050354540}
   - component: {fileID: 198533276141313876}
   - component: {fileID: 199176809758892682}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Magic fire pro orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24226,7 +24226,7 @@ GameObject:
   - component: {fileID: 5662190538824695626}
   - component: {fileID: -4119142795388543349}
   - component: {fileID: 3592504047779399489}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -23,6 +23,7 @@ public class StatePatrol : EnemyBaseState
         agent.speed = patrolSpeed; // Set the speed of the agent
         agent.stoppingDistance = stoppingDistance; // Set the stopping distance for the agent
         currentWaypoint = waypoints[(int)currentWaypointIndex]; // Get the next waypoint
+
     }
 
     public override void UpdateState()

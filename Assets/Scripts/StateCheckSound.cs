@@ -17,7 +17,8 @@ public class StateCheckSound : EnemyBaseState
         agent.speed = chaseSpeed; // Set the speed of the agent
         agent.stoppingDistance = stoppingDistance; // Set the stopping distance for the agent
         agent.SetDestination(doorPos);
-        
+
+
     }
 
     public override void UpdateState()

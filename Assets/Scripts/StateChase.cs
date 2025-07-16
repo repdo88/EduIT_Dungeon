@@ -17,6 +17,7 @@ public class StateChase : EnemyBaseState
         agent = GetComponent<NavMeshAgent>();
         agent.speed = chaseSpeed; // Set the speed of the agent
         agent.stoppingDistance = stoppingDistance; // Set the stopping distance for the agent
+
     }
 
     public override void UpdateState()
