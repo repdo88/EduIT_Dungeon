@@ -258,6 +258,10 @@ namespace StarterAssets
                     _input.attack = false; // reset attack input after processing
                 }
             }
+            else
+            {
+                _input.attack = false; // reset attack input after processing
+            }
         }
 
         private IEnumerator AttackCoroutine()

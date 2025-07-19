@@ -45,6 +45,8 @@ public class Enemy2Brain : MonoBehaviour
     [SerializeField] private string weaponLayer = "Weapon";
 
     private int animIDSpeed; // Animator ID for speed parameter
+    private int animIDDeath;
+    
     private Animator animator; // Animator component for the enemy
     private bool hasAnimator; // Flag to check if the enemy has an animator component
 
@@ -63,6 +65,8 @@ public class Enemy2Brain : MonoBehaviour
     {
         hasAnimator = TryGetComponent<Animator>(out animator); // Check if the enemy has an animator component
         animIDSpeed = Animator.StringToHash("Speed"); // Initialize the animator ID for speed parameter
+        animIDDeath = Animator.StringToHash("Death"); // Initialize the animator ID for alive parameter
+        
     }
 
     // Start is called before the first frame update
@@ -192,7 +196,12 @@ public class Enemy2Brain : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer(weaponLayer))
         {
             isAlive = false; // Set the enemy to dead if hit by a weapon
+            if (hasAnimator)
+            {
+                animator.SetBool(animIDDeath, true); // Set the alive parameter to false in the animator
+            }
             agent.enabled = false; // Disable the NavMeshAgent component
+            
         }
     }
 
