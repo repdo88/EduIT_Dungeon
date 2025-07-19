@@ -26,8 +26,8 @@ public class CharacterLife : MonoBehaviour
         if ((layerMask.value & (1 << collider.transform.gameObject.layer)) > 0)
         {
             Debug.Log("Character hit by enemy!");
-            //onDeath.Invoke(); // Trigger the death event
-            //player.SetActive(false); // Deactivate the player GameObject
+            onDeath.Invoke(); // Trigger the death event
+            player.SetActive(false); // Deactivate the player GameObject
         }
     }
 }

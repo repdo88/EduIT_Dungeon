@@ -7,8 +7,10 @@ using UnityEngine.Events;
 public class PlayerVision : MonoBehaviour
 {
     [SerializeField] GameObject eyes; // Reference to the player's eyes GameObject
+    
     [SerializeField] float visionRange = 5f; // Range of the player's vision
     [SerializeField] LayerMask interactableLayer; // Layer mask to filter interactable objects
+    [SerializeField] LayerMask chestLayer; // Layer mask to filter interactable objects
     public UnityEvent onInteractRange; // Event to trigger when an interaction is possible
     public UnityEvent onInteractNotRange; // Event to trigger when no interactable objects are in range
     public bool canAttack = false; // Flag to check if the player can attack
@@ -18,7 +20,7 @@ public class PlayerVision : MonoBehaviour
     public UnityEvent onAttackNotRange; // Event to trigger when no attackable objects are in range
 
     private StarterAssetsInputs _input; // Reference to the StarterAssetsInputs component for input handling
-
+    
 
 
     // Start is called before the first frame update
@@ -30,6 +32,7 @@ public class PlayerVision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Head ray for door interaction
         Ray vision = new Ray(eyes.transform.position, eyes.transform.forward);
         if (Physics.Raycast(vision, out RaycastHit hitInfo, visionRange, interactableLayer))
         {
@@ -37,13 +40,36 @@ public class PlayerVision : MonoBehaviour
             //if (Input.GetKeyDown(KeyCode.E))
             if (_input.interact)
             {
-                
+
                 Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
                 if (interactable != null)
                 {
-                    
+
                     interactable.Interact(); // Call the Interact method on the interactable object
                 }
+            }
+        }
+        else if (Physics.Raycast(vision, out RaycastHit hitInfo3, visionRange, chestLayer))
+        {
+            if (!hitInfo3.collider.GetComponent<ChestOpen>().isOpen)
+            {
+                onInteractRange.Invoke(); // Trigger the interaction event if an interactable object is in range
+                //if (Input.GetKeyDown(KeyCode.E))
+                if (_input.interact)
+                {
+
+
+                    Interactable interactable2 = hitInfo3.collider.GetComponent<Interactable>();
+                    if (interactable2 != null)
+                    {
+
+                        interactable2.Interact(); // Call the Interact method on the interactable object
+                    }
+                }
+            }
+            else
+            {
+                onInteractNotRange.Invoke(); // Trigger the no interaction event if the chest is already open
             }
         }
         else
@@ -51,6 +77,7 @@ public class PlayerVision : MonoBehaviour
             onInteractNotRange.Invoke(); // Trigger the no interaction event if no interactable objects are in range
         }
         _input.interact = false; // Reset the interact input to prevent repeated interactions
+
 
         // Check if the player can attack
         if (Physics.Raycast(vision, out RaycastHit hitInfo2, visionAttack, attackableLayer))
@@ -87,5 +114,6 @@ public class PlayerVision : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawRay(eyes.transform.position, eyes.transform.forward * visionRange);
+        
     }
 }
