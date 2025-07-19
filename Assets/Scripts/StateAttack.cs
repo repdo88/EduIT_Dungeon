@@ -18,6 +18,7 @@ public class StateAttack : EnemyBaseState
         base.OnEnterState();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = attackSpeed; // Set the speed of the agent
+        shootTimer = shootInterval;
 
     }
 

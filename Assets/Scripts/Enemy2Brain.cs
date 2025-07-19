@@ -10,7 +10,7 @@ public class Enemy2Brain : MonoBehaviour
     [SerializeField] private float visionAngleThreshold = 0.5f;
     private float tempVisionAngleTheshold;
     [SerializeField] private float visionMaxDistance = 3f;
-    private bool seePlayer;
+    public bool seePlayer;
     private bool inAngleVision;
     private bool inRangeVision;
     private Vector3 directionToPlayer;

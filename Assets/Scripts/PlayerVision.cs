@@ -11,6 +11,11 @@ public class PlayerVision : MonoBehaviour
     [SerializeField] LayerMask interactableLayer; // Layer mask to filter interactable objects
     public UnityEvent onInteractRange; // Event to trigger when an interaction is possible
     public UnityEvent onInteractNotRange; // Event to trigger when no interactable objects are in range
+    public bool canAttack = false; // Flag to check if the player can attack
+    [SerializeField] float visionAttack = 3f; // Range of the player attack vision
+    [SerializeField] LayerMask attackableLayer; // Layer mask to filter interactable objects
+    public UnityEvent onAttackRange; // Event to trigger when an attack is possible
+    public UnityEvent onAttackNotRange; // Event to trigger when no attackable objects are in range
 
     private StarterAssetsInputs _input; // Reference to the StarterAssetsInputs component for input handling
 
@@ -46,6 +51,36 @@ public class PlayerVision : MonoBehaviour
             onInteractNotRange.Invoke(); // Trigger the no interaction event if no interactable objects are in range
         }
         _input.interact = false; // Reset the interact input to prevent repeated interactions
+
+        // Check if the player can attack
+        if (Physics.Raycast(vision, out RaycastHit hitInfo2, visionAttack, attackableLayer))
+        {
+            var enemyBrain = hitInfo2.collider.GetComponent<Enemy2Brain>(); 
+            if (enemyBrain != null)
+            {
+                if (!enemyBrain.seePlayer)
+                {
+                    onAttackRange.Invoke(); // Trigger the attack event if an attackable object is in range
+                    canAttack = true; // Set the canAttack flag to true
+                }
+                else
+                {
+                    onAttackNotRange.Invoke(); // Trigger the no attack event if the enemy sees the player
+                    canAttack = false; // Set the canAttack flag to false
+                }
+
+            }
+            else
+            {
+                onAttackNotRange.Invoke(); // Trigger the no attack event if no attackable objects are in range
+                canAttack = false; // Set the canAttack flag to false
+            }
+        }
+        else
+        {
+            onAttackNotRange.Invoke(); // Trigger the no attack event if no attackable objects are in range
+            canAttack = false; // Set the canAttack flag to false
+        }
     }
 
     void OnDrawGizmos()
