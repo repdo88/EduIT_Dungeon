@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class Enemy2Brain : MonoBehaviour
 {
+    [SerializeField] private bool isAlive = true; // Flag to enable or disable the enemy
     [Header("Sensors")]
     [SerializeField] private float visionAngleThreshold = 0.5f;
     private float tempVisionAngleTheshold;
@@ -41,10 +42,12 @@ public class Enemy2Brain : MonoBehaviour
     private bool playerIsCrouch;
     private float playerSpeed;
     [SerializeField] private string playerLayer = "Player";
+    [SerializeField] private string weaponLayer = "Weapon";
 
     private int animIDSpeed; // Animator ID for speed parameter
     private Animator animator; // Animator component for the enemy
     private bool hasAnimator; // Flag to check if the enemy has an animator component
+
 
     private void OnEnable()
     {
@@ -80,6 +83,7 @@ public class Enemy2Brain : MonoBehaviour
     {
         if (isActive)
         {
+            if (!isAlive) return; // Exit if the enemy is not alive
             currentState.UpdateState(); // Update the current state of the enemy
 
         }
@@ -92,6 +96,7 @@ public class Enemy2Brain : MonoBehaviour
 
     private void UpdateSensors()
     {
+        if (!isAlive) return; // Exit if the enemy is not alive
         //logic to simulate that the enemy can hear the player when is moving and is not crouch
         playerIsCrouch = playerController.playerIsCrouch;
         playerSpeed = playerController.playerSpeed;
@@ -181,6 +186,17 @@ public class Enemy2Brain : MonoBehaviour
         doorTrigger = true; // Set the door trigger flag to true
         doorPosition = door.transform.position; // Store the position of the door when triggered
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer(weaponLayer))
+        {
+            isAlive = false; // Set the enemy to dead if hit by a weapon
+            agent.enabled = false; // Disable the NavMeshAgent component
+        }
+    }
+
+
 
     private void OnDrawGizmosSelected()
     {

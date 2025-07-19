@@ -1,4 +1,5 @@
-﻿ using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -15,6 +16,9 @@ namespace StarterAssets
     public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
+
+        [SerializeField] private GameObject daggerCollider; // Reference to the dagger collider GameObject
+
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
 
@@ -245,6 +249,7 @@ namespace StarterAssets
             {
                 if (_input.crouch)
                 {
+                    StartCoroutine(AttackCoroutine()); // Start attack coroutine if crouching
                     _animatorChild.SetBool(_animIDAttack, _input.attack);
                     _input.attack = false; // reset attack input after processing
                 }
@@ -254,6 +259,15 @@ namespace StarterAssets
                 }
             }
         }
+
+        private IEnumerator AttackCoroutine()
+        {
+            daggerCollider.SetActive(true); // Activate the dagger collider
+            // Wait for the attack animation to finish
+            yield return new WaitForSeconds(1.3f); // Adjust the duration as needed
+            daggerCollider.SetActive(false); // Deactivate the dagger collider
+        }
+
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
