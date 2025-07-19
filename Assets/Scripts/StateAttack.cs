@@ -12,6 +12,9 @@ public class StateAttack : EnemyBaseState
     private float shootTimer;
     [SerializeField] private float attackSpeed = 0.1f; // Speed of the chase
 
+    private Animator animator; // Animator component for the enemy
+    private bool hasAnimator; // Flag to check if the enemy has an animator component
+    private int animIDAtack; // Animator ID for attack animation
     private NavMeshAgent agent; // Reference to the NavMeshAgent component
     public override void OnEnterState()
     {
@@ -19,7 +22,9 @@ public class StateAttack : EnemyBaseState
         agent = GetComponent<NavMeshAgent>();
         agent.speed = attackSpeed; // Set the speed of the agent
         shootTimer = shootInterval;
-
+        hasAnimator = TryGetComponent<Animator>(out animator); // Check if the enemy has an animator component
+        animIDAtack = Animator.StringToHash("Attack"); // Initialize the animator ID for attack animation
+        StartCoroutine(Shoot()); // Start the shooting coroutine
     }
 
     public override void UpdateState()
@@ -29,16 +34,17 @@ public class StateAttack : EnemyBaseState
         shootTimer -= Time.deltaTime;
         if (shootTimer <= 0f)
         {
-            Shoot();
+            StartCoroutine(Shoot()); // Start the shooting coroutine
             shootTimer = shootInterval;
         }
     }
 
-    void Shoot()
+    private IEnumerator Shoot()
     {
-        if (playerTransform == null) return;
+        //if (playerTransform == null) return;
         Debug.Log("Shooting Fireball");
-
+        animator?.SetTrigger(animIDAtack); // Trigger the attack animation if animator exists
+        yield return new WaitForSeconds(0.55f); // Esperamos un tiempo antes de disparar
         // Instanciamos la bola de fuego
         var fireballObj = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
 

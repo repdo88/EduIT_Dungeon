@@ -19539,7 +19539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46519fa254e8bb840b5a765982035146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolSpeed: 0.1
+  patrolSpeed: 0.6
   stoppingDistance: 0.1
   pauseTime: 3
   waypoints:
@@ -19613,7 +19613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireballPrefab: {fileID: 3241212043661310999, guid: 83579218354499d4da3c2f93718355a9, type: 3}
   firePoint: {fileID: 547107295}
-  shootInterval: 2
+  shootInterval: 2.5
   playerTransform: {fileID: 1327984131}
   attackSpeed: 0.1
 --- !u!95 &1606767807
