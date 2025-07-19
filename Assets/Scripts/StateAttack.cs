@@ -44,7 +44,7 @@ public class StateAttack : EnemyBaseState
         //if (playerTransform == null) return;
         Debug.Log("Shooting Fireball");
         animator?.SetTrigger(animIDAtack); // Trigger the attack animation if animator exists
-        yield return new WaitForSeconds(0.55f); // Esperamos un tiempo antes de disparar
+        yield return new WaitForSeconds(0.5f); // Esperamos un tiempo antes de disparar
         // Instanciamos la bola de fuego
         var fireballObj = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
 

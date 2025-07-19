@@ -19611,7 +19611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a9e383ec9c67d43be978bdef1852eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireballPrefab: {fileID: 3241212043661310999, guid: 83579218354499d4da3c2f93718355a9, type: 3}
+  fireballPrefab: {fileID: 3241212043661310999, guid: 8aeeecaab4c4bfa4d947e64b50dd1736, type: 3}
   firePoint: {fileID: 547107295}
   shootInterval: 2.5
   playerTransform: {fileID: 1327984131}
