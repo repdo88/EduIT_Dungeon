@@ -116,6 +116,7 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
+        PlayerVision _playerVision;
 
         private const float _threshold = 0.01f;
 
@@ -151,6 +152,7 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+            _playerVision = GetComponent<PlayerVision>();
         }
 
         private void Start()
@@ -238,7 +240,8 @@ namespace StarterAssets
 
         private void Attack()
         {
-            if (_input.attack)
+            
+            if (_input.attack && _playerVision.canAttack)
             {
                 if (_input.crouch)
                 {
