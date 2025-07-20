@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[System.Serializable]
+public class DoorEvent : UnityEvent<OpenCloseDoor> { }
 public class OpenCloseDoor : MonoBehaviour, Interactable
 {
     private Animator doorAnimator;
@@ -11,7 +13,7 @@ public class OpenCloseDoor : MonoBehaviour, Interactable
     private int animIDInteract = Animator.StringToHash("Interact");
     private bool hasAnimator;
     private bool isOpen = false;
-    public static event Action<OpenCloseDoor> OnDoorInteract; // Event to notify when the door is interacted with
+    public DoorEvent OnDoorInteract = new DoorEvent(); // Event to notify when the door is interacted with
 
 
     // Start is called before the first frame update
@@ -28,7 +30,7 @@ public class OpenCloseDoor : MonoBehaviour, Interactable
 
     public void Interact()
     {
-        OnDoorInteract.Invoke(this); // Notify subscribers that the door is being interacted with
+        OnDoorInteract?.Invoke(this); // Notify subscribers that the door is being interacted with
         
         if (hasAnimator)
         {

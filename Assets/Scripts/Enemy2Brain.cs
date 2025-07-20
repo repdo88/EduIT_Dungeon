@@ -26,6 +26,7 @@ public class Enemy2Brain : MonoBehaviour
     [SerializeField] private float patrolTime = 5f; // Time to wait before patrolling again
     [SerializeField] private EnemyBaseState chaseState; // Chase state of the enemy
     [SerializeField] private EnemyBaseState checkSoundState; // Chase state of the enemy
+    [SerializeField] private OpenCloseDoor[] doors; // Array of doors that the enemy can interact with
     private bool doorTrigger = false; // Flag to check if the door is triggered
     private float distanceToDoor; // Distance to the door when triggered
     private EnemyBaseState currentState; // Current state of the enemy
@@ -53,12 +54,24 @@ public class Enemy2Brain : MonoBehaviour
 
     private void OnEnable()
     {
-        OpenCloseDoor.OnDoorInteract += OnDoorEvent; // Subscribe to the door interaction event
+        foreach (var door in doors)
+        {
+            if (door != null)
+            {
+                door.OnDoorInteract.AddListener(OnDoorEvent); // Subscribe to the door interaction event
+            }
+        }
     }
 
     private void OnDisable()
     {
-        OpenCloseDoor.OnDoorInteract -= OnDoorEvent; // Unsubscribe from the door interaction event
+        foreach (var door in doors)
+        {
+            if (door != null)
+            {
+                door.OnDoorInteract.RemoveListener(OnDoorEvent); // Unsubscribe from the door interaction event
+            }
+        }
     }
 
     private void Awake()
