@@ -8,7 +8,8 @@ public class ManagerScene : MonoBehaviour
     [SerializeField] GameObject pressEText; // Reference to the UI text object that prompts the player to press 'E'
     [SerializeField] GameObject attackText; // Reference to the UI text object that prompts the player to attack
     [SerializeField] GameObject gameOverBackground; // Reference to the player GameObject
-
+    [SerializeField] GameObject startImage;
+    private bool isDead; // Flag to check if the player is dead
 
     public void Awake()
     {
@@ -22,6 +23,19 @@ public class ManagerScene : MonoBehaviour
             Destroy(gameObject); // Destroy duplicate instances
         }
     }
+
+    public void Update()
+    {
+        if (isDead && Input.GetKeyDown(KeyCode.Return))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0); // Load the Main Menu scene
+        }
+        else if (Input.GetKeyDown(KeyCode.Return))
+        {
+            startImage.SetActive(false); // Hide the start image when 'Return' is pressed
+        }
+    }
+
 
     public void ShowPressText()
     {
@@ -59,6 +73,7 @@ public class ManagerScene : MonoBehaviour
         if (gameOverBackground != null)
         {
             gameOverBackground.SetActive(true); // Show the game over background
+            isDead = true; // Set the isDead flag to true
         }
     }
 }
