@@ -4770,6 +4770,10 @@ PrefabInstance:
       value: Door (1)
       objectReference: {fileID: 0}
     - target: {fileID: 416386656469751746, guid: 9175d08a6bdddeb48afa15d1b714d918, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 416386656469751746, guid: 9175d08a6bdddeb48afa15d1b714d918, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
@@ -5837,6 +5841,10 @@ MonoBehaviour:
   pressEText: {fileID: 592304353}
   attackText: {fileID: 872713772}
   gameOverBackground: {fileID: 1721813489}
+  startImage: {fileID: 0}
+  openableDoors:
+  - {fileID: 5621130199441402101}
+  - {fileID: 8750329359020694422}
 --- !u!1 &568665238 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1361788057753138076, guid: edd823a24a8b3e545b7f38240de1e369, type: 3}
@@ -7345,6 +7353,10 @@ PrefabInstance:
     - target: {fileID: 2796593392193910250, guid: 4cf93654f2ca3be42b3b8da0a903ddcb, type: 3}
       propertyPath: m_Name
       value: Dagger_1H_Newbie_03_Bl
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796593392193910250, guid: 4cf93654f2ca3be42b3b8da0a903ddcb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3279938237851529040, guid: 4cf93654f2ca3be42b3b8da0a903ddcb, type: 3}
       propertyPath: m_LocalScale.x
@@ -9320,6 +9332,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOpen: 0
+  chestOpen:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 557043044}
+        m_TargetAssemblyTypeName: ManagerScene, Assembly-CSharp
+        m_MethodName: makeDoorsOpenable
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2047120111}
+        m_TargetAssemblyTypeName: CharacterLife, Assembly-CSharp
+        m_MethodName: getDagger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &835576116 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5059969035713293582, guid: edd823a24a8b3e545b7f38240de1e369, type: 3}
@@ -24507,6 +24546,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  dagger: {fileID: 2052883875}
+--- !u!1 &2052883875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2796593392193910250, guid: 4cf93654f2ca3be42b3b8da0a903ddcb, type: 3}
+  m_PrefabInstance: {fileID: 662794228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2053002320 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4463566038210007903, guid: 49a5f24a081cbbc44bd23d76c2869723, type: 3}
@@ -26347,7 +26392,7 @@ GameObject:
   - component: {fileID: 4666405107518828457}
   - component: {fileID: 8492835544026964946}
   - component: {fileID: 3722237065791125633}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: DoorPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26964,7 +27009,7 @@ GameObject:
   - component: {fileID: 8624191706525277386}
   - component: {fileID: 4805819075273724081}
   - component: {fileID: 343721565708405730}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: DoorPivot (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

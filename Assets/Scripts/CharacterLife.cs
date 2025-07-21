@@ -8,6 +8,7 @@ public class CharacterLife : MonoBehaviour
     [SerializeField] LayerMask layerMask;
     public UnityEvent onDeath;
     private GameObject player; // Reference to the player GameObject
+    [SerializeField] private GameObject dagger; // Reference to the dagger GameObject
 
     // Start is called before the first frame update
     void Start()
@@ -29,5 +30,10 @@ public class CharacterLife : MonoBehaviour
             onDeath.Invoke(); // Trigger the death event
             player.SetActive(false); // Deactivate the player GameObject
         }
+    }
+
+    public void getDagger()
+    {
+        dagger.SetActive(true); // Activate the dagger GameObject
     }
 }

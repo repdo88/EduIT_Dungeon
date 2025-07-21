@@ -10,6 +10,7 @@ public class ManagerScene : MonoBehaviour
     [SerializeField] GameObject gameOverBackground; // Reference to the player GameObject
     [SerializeField] GameObject startImage;
     private bool isDead; // Flag to check if the player is dead
+    [SerializeField] private GameObject[] openableDoors; // Doors that only can be open after an event
 
     public void Awake()
     {
@@ -80,5 +81,17 @@ public class ManagerScene : MonoBehaviour
     public void GoToSecondDungeon()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(2); // Load the second dungeon scene
+    }
+
+    public void makeDoorsOpenable()
+    {
+        int targetLayer = LayerMask.NameToLayer("Door"); // Get the layer index for "OpenableDoors"
+        foreach (GameObject door in openableDoors)
+        {
+            if (door != null)
+            {
+                door.layer = targetLayer; // Set the layer of each door to "OpenableDoors"
+            }
+        }
     }
 }
