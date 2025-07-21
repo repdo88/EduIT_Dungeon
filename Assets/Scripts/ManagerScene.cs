@@ -8,6 +8,7 @@ public class ManagerScene : MonoBehaviour
     [SerializeField] GameObject pressEText; // Reference to the UI text object that prompts the player to press 'E'
     [SerializeField] GameObject attackText; // Reference to the UI text object that prompts the player to attack
     [SerializeField] GameObject gameOverBackground; // Reference to the player GameObject
+    [SerializeField] GameObject winBackgounrd;
     [SerializeField] GameObject chestText; // Reference to the player GameObject
     [SerializeField] GameObject startImage;
     private bool isDead = false; // Flag to check if the player is dead
@@ -105,6 +106,15 @@ public class ManagerScene : MonoBehaviour
             {
                 door.layer = targetLayer; // Set the layer of each door to "OpenableDoors"
             }
+        }
+    }
+
+    public void showWinBackground()
+    {
+        if (winBackgounrd != null)
+        {
+            winBackgounrd.SetActive(true); // Show the win background
+            
         }
     }
 }
