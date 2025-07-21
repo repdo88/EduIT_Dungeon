@@ -214,7 +214,7 @@ public class Enemy2Brain : MonoBehaviour
                 animator.SetBool(animIDDeath, true); // Set the alive parameter to false in the animator
             }
             agent.enabled = false; // Disable the NavMeshAgent component
-            
+            this.gameObject.layer = LayerMask.NameToLayer("Default"); // Change the layer of the enemy to "DeadEnemy"
         }
     }
 
