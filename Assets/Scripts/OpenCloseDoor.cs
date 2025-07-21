@@ -15,6 +15,11 @@ public class OpenCloseDoor : MonoBehaviour, Interactable
     private bool isOpen = false;
     public DoorEvent OnDoorInteract = new DoorEvent(); // Event to notify when the door is interacted with
 
+    [Header("Sound settings")]
+    [SerializeField] private AudioSource doorAudioSource; // Audio source for playing door sounds
+    [SerializeField] private AudioClip doorOpenSound; // Sound to play when the door opens
+    [SerializeField] private AudioClip doorCloseSound; // Sound to play when the door closes
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,12 +47,20 @@ public class OpenCloseDoor : MonoBehaviour, Interactable
                 //OnDoorInteract?.Invoke(this); // Notify subscribers that the door is being interacted with
                 doorAnimator.SetBool(animIDOpen, true);
                 isOpen = !isOpen; // Toggle the open state
+                if (doorAudioSource != null && doorOpenSound != null)
+                {
+                    doorAudioSource.PlayOneShot(doorOpenSound); // Play the door open sound
+                }
             }
             else
             {
                 //OnDoorInteract?.Invoke(this); // Notify subscribers that the door is being interacted with
                 doorAnimator.SetBool(animIDOpen, false);
                 isOpen = !isOpen; // Toggle the open state
+                if (doorAudioSource != null && doorCloseSound != null)
+                {
+                    doorAudioSource.PlayOneShot(doorCloseSound); // Play the door close sound
+                }
             }
             
         }
