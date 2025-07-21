@@ -76,4 +76,9 @@ public class ManagerScene : MonoBehaviour
             isDead = true; // Set the isDead flag to true
         }
     }
+
+    public void GoToSecondDungeon()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2); // Load the second dungeon scene
+    }
 }
