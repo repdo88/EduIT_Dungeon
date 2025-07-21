@@ -8,8 +8,9 @@ public class ManagerScene : MonoBehaviour
     [SerializeField] GameObject pressEText; // Reference to the UI text object that prompts the player to press 'E'
     [SerializeField] GameObject attackText; // Reference to the UI text object that prompts the player to attack
     [SerializeField] GameObject gameOverBackground; // Reference to the player GameObject
+    [SerializeField] GameObject chestText; // Reference to the player GameObject
     [SerializeField] GameObject startImage;
-    private bool isDead; // Flag to check if the player is dead
+    private bool isDead = false; // Flag to check if the player is dead
     [SerializeField] private GameObject[] openableDoors; // Doors that only can be open after an event
 
     public void Awake()
@@ -33,7 +34,14 @@ public class ManagerScene : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            startImage.SetActive(false); // Hide the start image when 'Return' is pressed
+            if (startImage != null)
+            {
+                startImage.SetActive(false); // Hide the start image when 'Return' is pressed
+            }
+            if (chestText != null)
+            {
+                chestText.SetActive(false); // Hide the chest text when 'Return' is pressed
+            }
         }
     }
 
@@ -85,6 +93,11 @@ public class ManagerScene : MonoBehaviour
 
     public void makeDoorsOpenable()
     {
+        if (chestText != null)
+        {
+            chestText.SetActive(true); // Show the chest text
+        }
+            
         int targetLayer = LayerMask.NameToLayer("Door"); // Get the layer index for "OpenableDoors"
         foreach (GameObject door in openableDoors)
         {
