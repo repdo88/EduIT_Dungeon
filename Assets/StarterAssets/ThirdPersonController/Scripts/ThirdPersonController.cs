@@ -161,6 +161,8 @@ namespace StarterAssets
 
         private void Start()
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             Transform charTransform = transform.Find("Char");
             _hasAnimatorChild = charTransform.TryGetComponent<Animator>(out _animatorChild);
