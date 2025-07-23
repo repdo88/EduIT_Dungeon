@@ -51,6 +51,8 @@ public class Enemy2Brain : MonoBehaviour
     private Animator animator; // Animator component for the enemy
     private bool hasAnimator; // Flag to check if the enemy has an animator component
 
+    private AudioSource audioSource; // Audio source for playing sounds
+    [SerializeField] private AudioClip enemyDeathSound; // Sound to play when the enemy dies
 
     private void OnEnable()
     {
@@ -93,6 +95,8 @@ public class Enemy2Brain : MonoBehaviour
 
         currentState = defaultState;
         currentState.OnEnterState(); // Initialize the current state
+
+        audioSource = GetComponent<AudioSource>(); // Get the AudioSource component attached to this GameObject
     }
 
     // Update is called once per frame
@@ -209,6 +213,7 @@ public class Enemy2Brain : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer(weaponLayer))
         {
             isAlive = false; // Set the enemy to dead if hit by a weapon
+            audioSource.PlayOneShot(enemyDeathSound); // Play the enemy death sound
             if (hasAnimator)
             {
                 animator.SetBool(animIDDeath, true); // Set the alive parameter to false in the animator

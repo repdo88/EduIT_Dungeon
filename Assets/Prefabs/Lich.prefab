@@ -1288,6 +1288,7 @@ MonoBehaviour:
   attackSpeed: 0.1
   lichAudioSource: {fileID: 1049544385183958226}
   fireBallSound: {fileID: 8300000, guid: 59ec952dd66e55f4c9ff28b95899cb21, type: 3}
+  monsterAttack: {fileID: 8300000, guid: 12e7285fa38aaf943a0ed8c7f3c684eb, type: 3}
 --- !u!136 &5736473364094943550
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1341,6 +1342,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   playerLayer: Player
   weaponLayer: Weapon
+  enemyDeathSound: {fileID: 8300000, guid: 1d92c5ac0e056b045b4461b147f95be5, type: 3}
 --- !u!95 &7630869478073393199
 Animator:
   serializedVersion: 5

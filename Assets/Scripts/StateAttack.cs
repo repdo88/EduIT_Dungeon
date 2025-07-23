@@ -19,7 +19,9 @@ public class StateAttack : EnemyBaseState
 
     [Header("Sound settings")]
     [SerializeField] private AudioSource lichAudioSource; 
-    [SerializeField] private AudioClip fireBallSound; 
+    [SerializeField] private AudioClip fireBallSound;
+    [SerializeField] private AudioClip monsterAttack;
+
     public override void OnEnterState()
     {
         base.OnEnterState();
@@ -47,6 +49,7 @@ public class StateAttack : EnemyBaseState
     {
         //if (playerTransform == null) return;
         Debug.Log("Shooting Fireball");
+        lichAudioSource?.PlayOneShot(monsterAttack); // Play the attack sound if audio source exists
         animator?.SetTrigger(animIDAtack); // Trigger the attack animation if animator exists
         yield return new WaitForSeconds(0.5f); // Esperamos un tiempo antes de disparar
         // Instanciamos la bola de fuego
