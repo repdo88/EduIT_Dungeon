@@ -213,6 +213,9 @@ public class Enemy2Brain : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer(weaponLayer))
         {
             isAlive = false; // Set the enemy to dead if hit by a weapon
+            audioSource.Stop(); // Stop the patrol sound if audio source exists
+            audioSource.loop = false; // Disable looping for the audio source
+            audioSource.spatialBlend = 0.5f; // Set the spatial blend to 3D
             audioSource.PlayOneShot(enemyDeathSound); // Play the enemy death sound
             if (hasAnimator)
             {
