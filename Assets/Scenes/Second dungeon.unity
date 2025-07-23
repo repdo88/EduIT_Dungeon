@@ -8036,12 +8036,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675233231}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.59, y: -0.2, z: 2.73}
-  m_LocalScale: {x: -5.42, y: -5.42, z: -5.42}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.032046318, y: 1.763, z: -0.08618307}
+  m_LocalScale: {x: -5.42, y: -5.4199996, z: -5.4199996}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1567240476}
+  m_Father: {fileID: 834874868}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!108 &675233233
 Light:
@@ -9860,6 +9860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOpen: 0
+  chestLight: {fileID: 675233231}
   chestOpen:
     m_PersistentCalls:
       m_Calls:
@@ -9899,6 +9900,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!4 &834874868 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1887739120135194135, guid: 840a5229d4c804a458fa3c521212b461, type: 3}
+  m_PrefabInstance: {fileID: 1508334040}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &835576116 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5059969035713293582, guid: edd823a24a8b3e545b7f38240de1e369, type: 3}
@@ -18350,7 +18356,10 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 2273490953825103212, guid: 840a5229d4c804a458fa3c521212b461, type: 3}
     - {fileID: 6662938717964016439, guid: 840a5229d4c804a458fa3c521212b461, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1887739120135194135, guid: 840a5229d4c804a458fa3c521212b461, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 675233232}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7005709567172060406, guid: 840a5229d4c804a458fa3c521212b461, type: 3}
       insertIndex: -1
@@ -18901,7 +18910,6 @@ Transform:
   - {fileID: 354496674}
   - {fileID: 1363499897}
   - {fileID: 579778742}
-  - {fileID: 675233232}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1576506958 stripped
@@ -25198,6 +25206,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   dagger: {fileID: 2052883875}
+  inmortal: 0
 --- !u!1 &2052883875 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2796593392193910250, guid: 4cf93654f2ca3be42b3b8da0a903ddcb, type: 3}

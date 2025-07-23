@@ -9,7 +9,9 @@ public class ChestOpen : MonoBehaviour, Interactable
     private int animIDOpen;
     public bool isOpen = false; // Track if the chest is open
     private bool hasAnimator;
+    [SerializeField] private GameObject chestLight; // Reference to the light GameObject
     public UnityEvent chestOpen; // Event to trigger when the chest is opened
+    
 
 
 
@@ -34,6 +36,7 @@ public class ChestOpen : MonoBehaviour, Interactable
             chestAnimator.SetTrigger(animIDOpen);
             isOpen = true; // Set the chest to open state
             chestOpen?.Invoke(); // Trigger the chest open event
+            chestLight.SetActive(false);
         }
     }
 

@@ -9,6 +9,7 @@ public class CharacterLife : MonoBehaviour
     public UnityEvent onDeath;
     private GameObject player; // Reference to the player GameObject
     [SerializeField] private GameObject dagger; // Reference to the dagger GameObject
+    [SerializeField] private bool inmortal = false; // Flag to check if the character is immortal
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +28,12 @@ public class CharacterLife : MonoBehaviour
         if ((layerMask.value & (1 << collider.transform.gameObject.layer)) > 0)
         {
             Debug.Log("Character hit by enemy!");
-            onDeath.Invoke(); // Trigger the death event
-            player.SetActive(false); // Deactivate the player GameObject
+            if (!inmortal) // Check if the character is not immortal
+            {
+                onDeath.Invoke(); // Trigger the death event
+                player.SetActive(false); // Deactivate the player GameObject
+            }
+            
         }
     }
 
