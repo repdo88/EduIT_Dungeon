@@ -16,6 +16,10 @@ public class StateAttack : EnemyBaseState
     private bool hasAnimator; // Flag to check if the enemy has an animator component
     private int animIDAtack; // Animator ID for attack animation
     private NavMeshAgent agent; // Reference to the NavMeshAgent component
+
+    [Header("Sound settings")]
+    [SerializeField] private AudioSource lichAudioSource; 
+    [SerializeField] private AudioClip fireBallSound; 
     public override void OnEnterState()
     {
         base.OnEnterState();
@@ -47,6 +51,7 @@ public class StateAttack : EnemyBaseState
         yield return new WaitForSeconds(0.5f); // Esperamos un tiempo antes de disparar
         // Instanciamos la bola de fuego
         var fireballObj = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
+        lichAudioSource?.PlayOneShot(fireBallSound); // Play the fireball sound if audio source exists
 
         // Inicializamos su dirección hacia el jugador
         var fireball = fireballObj.GetComponent<FireBall>();

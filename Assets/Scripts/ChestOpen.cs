@@ -11,7 +11,7 @@ public class ChestOpen : MonoBehaviour, Interactable
     private bool hasAnimator;
     [SerializeField] private GameObject chestLight; // Reference to the light GameObject
     public UnityEvent chestOpen; // Event to trigger when the chest is opened
-    
+    private AudioSource audioSource;
 
 
 
@@ -20,6 +20,7 @@ public class ChestOpen : MonoBehaviour, Interactable
     {
         hasAnimator = TryGetComponent<Animator>(out chestAnimator);
         animIDOpen = Animator.StringToHash("Open");
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -37,6 +38,7 @@ public class ChestOpen : MonoBehaviour, Interactable
             isOpen = true; // Set the chest to open state
             chestOpen?.Invoke(); // Trigger the chest open event
             chestLight.SetActive(false);
+            audioSource?.Play(); // Play the audio if the AudioSource is present
         }
     }
 
