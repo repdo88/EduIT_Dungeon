@@ -14,7 +14,9 @@ public class StatePatrol : EnemyBaseState
     private int currentWaypointIndex = 0; // Index of the current waypoint
     private Transform currentWaypoint; // Current waypoint transform
     private NavMeshAgent agent; // Reference to the NavMeshAgent component
-    
+    [SerializeField] private AudioSource audioSource; // Reference to the AudioSource component
+    [SerializeField] private AudioClip patrolSound; // Sound to play while patrolling
+
     private float pauseTimer = 0f; // Timer to track pause duration
     public override void OnEnterState()
     {
@@ -23,7 +25,10 @@ public class StatePatrol : EnemyBaseState
         agent.speed = patrolSpeed; // Set the speed of the agent
         agent.stoppingDistance = stoppingDistance; // Set the stopping distance for the agent
         currentWaypoint = waypoints[(int)currentWaypointIndex]; // Get the next waypoint
-
+        audioSource.loop = true; // Set the audio source to loop
+        audioSource.spatialBlend = 1f; // Set the spatial blend to 3D
+        audioSource.clip = patrolSound; // Assign the patrol sound to the audio source
+        audioSource.Play(); // Play the patrol sound
     }
 
     public override void UpdateState()
@@ -62,5 +67,10 @@ public class StatePatrol : EnemyBaseState
     {
         base.OnExitState();
         Debug.Log("Exiting Patrol State");
+        audioSource.Stop(); // Stop the patrol sound if audio source exists
+        audioSource.loop = false; // Disable looping for the audio source
+        audioSource.spatialBlend = 0.5f; // Set the spatial blend to 3D
     }
+
+
 }

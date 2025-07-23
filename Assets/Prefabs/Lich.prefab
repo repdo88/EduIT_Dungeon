@@ -1240,6 +1240,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  audioSource: {fileID: 1049544385183958226}
+  patrolSound: {fileID: 8300000, guid: ceb2474913e8b5e40b17213af473d784, type: 3}
 --- !u!114 &2391118489339897017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1269,6 +1271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseSpeed: 2
   stoppingDistance: 2
+  audioSource: {fileID: 1049544385183958226}
+  soundDetectedClip: {fileID: 8300000, guid: bc2baab908f1b004691a6ecf7044f61c, type: 3}
 --- !u!114 &9019981136886253309
 MonoBehaviour:
   m_ObjectHideFlags: 0
